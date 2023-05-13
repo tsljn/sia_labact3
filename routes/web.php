@@ -16,12 +16,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('/users',['uses' => 'UserController@g']); //get all users
+$router->get('/users',['uses' => 'UserController@getAllUsers']); //get all users
 
-$router->get('/guser/{id}', 'UserController@show'); // get user by id
+$router->get('/guser/{id}', 'UserController@showUsersID'); // get user by id
 
-$router->post('/auser', 'UserController@a'); // create new user record
+$router->post('/auser', 'UserController@addUsers'); // create new user record
 
-$router->put('/uuser/{id}', 'UserController@u'); // update user record
+$router->put('/uuser/{id}', 'UserController@updateUser'); // update user record
 
-$router->delete('/duser/{id}', 'UserController@d'); // delete record
+$router->delete('/duser/{id}', 'UserController@deleteUser'); // delete record

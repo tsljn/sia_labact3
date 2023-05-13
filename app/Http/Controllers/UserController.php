@@ -7,28 +7,32 @@ private $request;
 public function __construct(Request $request){
 $this->request = $request;
 }
-    public function g(){
+    public function getAllUsers(){
         $users = User::all();
         return response()->json($users, 200);
     }
-    public function show($id)
+    public function showUsersID($id)
     {
         //
         return User::where('id','like','%'.$id.'%')->get();
     }
-    public function a(Request $request ){
+    public function addUsers(Request $request ){
         $rules = [
-        'firstname' => 'required|max:20',
+       'id' => 'max:20',
+       'firstName' => 'required|max:20',
+       'lastName' => 'required|max:20',
         ];
         $this->validate($request,$rules);
         $user = User::create($request->all());
         return $user;
-       
+        
 }
-    public function u(Request $request,$id)
+    public function updateUser(Request $request,$id)
     {
     $rules = [
-    'firstname' => 'max:20',
+    'id' => 'max:20',
+    'firstName' => 'required|max:20',
+    'lastName' => 'required|max:20',
     ];
     $this->validate($request, $rules);
     $user = User::findOrFail($id);
@@ -42,11 +46,11 @@ $this->request = $request;
     $user->save();
     return $user;
 }
-    public function d($id)
+    public function deleteUser($id)
     {
     $user = User::findOrFail($id);
     $user->delete();
-    return $this->sucessResponse($user);
+
  
     // old code
     /*
